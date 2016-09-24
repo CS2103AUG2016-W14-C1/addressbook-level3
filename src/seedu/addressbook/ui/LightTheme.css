@@ -1,0 +1,16 @@
+
+
+.text-field {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Calibri";
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+}
+
+.text-area {
+    -fx-background-color: #eeeeee;
+    -fx-control-inner-background: #eeeeee;
+    -fx-font-family: "Calibri";
+    -fx-font-size: 10pt;
+    -fx-padding: 5 5 5 5;
+}
