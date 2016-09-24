@@ -5,6 +5,7 @@
     -fx-font-family: "Calibri";
     -fx-font-weight: bold;
     -fx-text-fill: black;
+    -fx-pref-width: 500px;
 }
 
 .text-area {
@@ -13,4 +14,8 @@
     -fx-font-family: "Calibri";
     -fx-font-size: 10pt;
     -fx-padding: 5 5 5 5;
+}
+
+.button {
+	-fx-pref-width: 150px;
 }
