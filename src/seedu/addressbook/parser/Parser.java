@@ -154,7 +154,19 @@ public class Parser {
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new DeleteCommand(targetIndex);
-        } catch (ParseException | NumberFormatException e) {
+        } catch (NumberFormatException e) {
+            // Unable to delete using index, try delete using keywords
+            final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+            if (!matcher.matches()) {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeleteCommand.MESSAGE_USAGE));
+            }
+
+            // keywords delimited by whitespace
+            final String[] keywords = matcher.group("keywords").split("\\s+");
+            final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+            return new DeleteCommand(keywordSet);
+        } catch (ParseException e) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
     }
