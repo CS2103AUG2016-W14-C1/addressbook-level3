@@ -14,6 +14,8 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n" 
             + "Displays all persons in the address book as a list with index numbers.\n\t"
+    		+ "Specify option [-sort asc] or [-sort desc] to sort the list by name.\n\t"
+            + "If no option is specified, the program does not perform sort operation.\n\t"
             + "Example: " + COMMAND_WORD;
     
     public static final String SORT_OPTION_WORD = "-sort";
