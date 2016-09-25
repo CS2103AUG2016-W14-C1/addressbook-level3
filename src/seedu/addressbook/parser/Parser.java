@@ -1,6 +1,7 @@
 package seedu.addressbook.parser;
 
 import seedu.addressbook.commands.*;
+import seedu.addressbook.commands.ListCommand.SortType;
 import seedu.addressbook.data.exception.IllegalValueException;
 
 import java.util.*;
@@ -72,7 +73,7 @@ public class Parser {
                 return prepareFind(arguments);
 
             case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+                return prepareList(arguments);
 
             case ViewCommand.COMMAND_WORD:
                 return prepareView(arguments);
@@ -227,6 +228,35 @@ public class Parser {
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindCommand(keywordSet);
     }
-
+    
+    /**
+     * Parses arguments in the context of the list person command.
+     * 
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareList(String args) {
+    	if (args.trim().isEmpty()) { return new ListCommand(SortType.NONE); }
+    	final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+    	if (!matcher.matches()) {
+    		return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
+    				ListCommand.MESSAGE_USAGE));
+    	}
+    	
+    	// extract keywords delimited by whitespace
+    	final String[] keywords = matcher.group("keywords").split("\\s+");
+    	SortType sortType;
+    	if (keywords[0].trim().equals(ListCommand.SORT_OPTION_WORD)) {
+    		if ((keywords.length > 1) && keywords[1].trim().equals(ListCommand.SORT_DESC_WORD)) {
+    			sortType = SortType.DESC;
+    		} else {
+    			sortType = SortType.ASC;
+    		}
+    	} else {
+    		sortType = SortType.NONE;
+    	}
+    	
+    	return new ListCommand(sortType);
+    }
 
 }
