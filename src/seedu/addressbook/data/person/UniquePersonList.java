@@ -1,5 +1,6 @@
 package seedu.addressbook.data.person;
 
+import seedu.addressbook.commands.ListCommand.SortType;
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.DuplicateDataException;
 
@@ -63,6 +64,18 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public UniquePersonList(UniquePersonList source) {
         internalList.addAll(source.internalList);
+    }
+    
+    /**
+     * Constructs a shallow copy of the sorted list.
+     */
+    public UniquePersonList(UniquePersonList source, SortType sortType) {
+    	internalList.addAll(source.internalList);
+    	if (sortType == SortType.ASC) {
+    		Collections.sort(internalList);
+    	} else if (sortType == SortType.DESC) {
+    		Collections.sort(internalList, Collections.reverseOrder());
+    	}
     }
 
     /**
