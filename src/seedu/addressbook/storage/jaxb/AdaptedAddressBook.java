@@ -1,5 +1,6 @@
 package seedu.addressbook.storage.jaxb;
 
+import seedu.addressbook.commands.ListCommand.SortType;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Person;
@@ -37,7 +38,7 @@ public class AdaptedAddressBook {
     public AdaptedAddressBook(AddressBook source) {
         persons = new ArrayList<>();
         tags = new ArrayList<>();
-        for (ReadOnlyPerson person : source.getAllPersons()) {
+        for (ReadOnlyPerson person : source.getAllPersons(SortType.NONE)) {
             persons.add(new AdaptedPerson(person));
         }
         for (Tag tag : source.getAllTags()) {

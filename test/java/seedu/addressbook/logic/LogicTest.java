@@ -6,6 +6,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import seedu.addressbook.commands.CommandResult;
+import seedu.addressbook.commands.ListCommand.SortType;
 import seedu.addressbook.commands.*;
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
@@ -189,7 +190,7 @@ public class LogicTest {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         AddressBook expectedAB = helper.generateAddressBook(false, true);
-        List<? extends ReadOnlyPerson> expectedList = expectedAB.getAllPersons().immutableListView();
+        List<? extends ReadOnlyPerson> expectedList = expectedAB.getAllPersons(SortType.NONE).immutableListView();
 
         // prepare address book state
         helper.addToAddressBook(addressBook, false, true);

@@ -1,5 +1,6 @@
 package seedu.addressbook.data;
 
+import seedu.addressbook.commands.ListCommand.SortType;
 import seedu.addressbook.data.person.*;
 import seedu.addressbook.data.person.UniquePersonList.*;
 import seedu.addressbook.data.tag.Tag;
@@ -134,8 +135,8 @@ public class AddressBook {
     /**
      * Defensively copied UniquePersonList of all persons in the address book at the time of the call.
      */
-    public UniquePersonList getAllPersons() {
-        return new UniquePersonList(allPersons);
+    public UniquePersonList getAllPersons(SortType sortType) {
+        return new UniquePersonList(allPersons, sortType);
     }
 
     /**
